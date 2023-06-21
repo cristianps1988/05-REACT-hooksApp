@@ -1,17 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Message = () => {
+    const [movimiento, setMovimiento] = useState({ x: 0, y: 0 })
 
     useEffect(() => {
-        console.log('Objeto montado')
+
+        const onMouseMove = ({ x, y }) => {
+            setMovimiento({ x, y })
+        }
+
+        window.addEventListener('mousemove', onMouseMove)
+
         return () => {
-            console.log('Objeto desmontado')
+            window.removeEventListener('mousemove', onMouseMove)
         }
     }, []);
 
     return (
         <>
             <h3>Usuario ya existe</h3>
+            {JSON.stringify(movimiento)}
         </>
     )
 }
